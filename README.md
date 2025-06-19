@@ -80,7 +80,7 @@ A curated collection of detailed case studies, each with supporting evidence, ar
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/YourUsername/YourRepoName.git
+   git clone https://github.com/Aryan-SOC/portfolio.git
    ```
 2. **Explore the portfolio website:**  
    Open `index.html` in the root directory to view my portfolio locally.
