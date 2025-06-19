@@ -1,146 +1,1309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta & SEO -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shewag's Cybersecurity Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shewag Bhattarai | Aspiring SOC Analyst Portfolio</title>
+    <meta name="description" content="Shewag Bhattarai's cybersecurity portfolio showcasing hands-on incident response, SIEM, HIDS, and Blue Team skills developed in a comprehensive home lab environment.">
+    <meta name="keywords" content="SOC Analyst, Incident Response, Cybersecurity Portfolio, Splunk, Wazuh, Home Lab, Blue Team, Linux Security, Threat Detection, Shewag Bhattarai, Bangalore, Cybersec">
+    <meta name="author" content="Shewag Bhattarai">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f512.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <!-- AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Shewag Bhattarai",
+        "jobTitle": "Aspiring SOC Analyst",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bangalore",
+            "addressCountry": "India"
+        },
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "[Your University Name]"
+        },
+        "email": "[Your Professional Email Address]",
+        "url": "[Your LinkedIn Profile URL]",
+        "sameAs": [
+            "[Your LinkedIn Profile URL]",
+            "[Link to your main GitHub Profile URL]"
+        ]
+    }
+    </script>
+
     <style>
-        /* Basic CSS for a clean look */
+        :root {
+            --bg-main: #1a1a2e;
+            --bg-alt: #16213e;
+            --accent-blue: #00bcd4;
+            --accent-pink: #e94560;
+            --accent-purple: #8a2be2;
+            --text-main: #f5f6fa;
+            --text-muted: #b2becd;
+            --card-bg: #23234a;
+            --border-radius: 1.2rem;
+            --transition: 0.3s cubic-bezier(.4,0,.2,1);
+            --shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+            --font-main: 'Inter', 'Montserrat', 'Open Sans', Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg-main);
+        }
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            margin: 0;
+            font-family: var(--font-main);
+            background: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        /* Abstract circuit board background for hero */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            background: url('https://www.transparenttextures.com/patterns/circuit-board.png');
+            opacity: 0.08;
+            pointer-events: none;
         }
-        h1, h2 {
-            color: #0056b3;
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(26,26,46,0.98);
+            box-shadow: 0 2px 16px 0 rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 2.5vw;
+            transition: background var(--transition);
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
         }
-        ul li {
-            margin-bottom: 10px;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
-        .project-item {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
-        .project-item:last-child {
-            border-bottom: none;
-        }
-        a {
-            color: #007bff;
+        .nav-links a {
+            color: var(--text-main);
             text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            transition: color var(--transition);
         }
-        a:hover {
+        .nav-links a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+            transition: width 0.3s;
+            margin-top: 2px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-blue);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            margin-left: 1rem;
+        }
+        .nav-hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 2vw;
+                background: var(--bg-alt);
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem 2rem;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow);
+                min-width: 180px;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+        }
+
+        /* HERO SECTION */
+        header.hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            background: linear-gradient(120deg, var(--bg-main) 80%, var(--accent-purple) 120%);
+            padding-top: 80px;
+            z-index: 1;
+        }
+        .hero-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-blue);
+            object-fit: cover;
+            margin-bottom: 1.2rem;
+            background: #23234a;
+            box-shadow: 0 0 0 6px var(--bg-alt), 0 4px 32px 0 rgba(0,0,0,0.18);
+            display: inline-block;
+        }
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--accent-blue);
+            text-shadow: 0 2px 12px #0006;
+        }
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+        .typed-cursor {
+            color: var(--accent-pink);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            margin: 1.5rem 0 2.5rem 0;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+            color: #fff;
+            border: none;
+            border-radius: 2em;
+            padding: 0.85em 2.2em;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 16px 0 rgba(0,188,212,0.10);
+            transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+            outline: none;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        .btn:hover, .btn:focus {
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 4px 32px 0 rgba(233,69,96,0.18);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.85;
+        }
+        .scroll-indicator .fa-chevron-down {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0);}
+            50% { transform: translateY(10px);}
+        }
+
+        /* SECTION GENERAL */
+        section {
+            padding: 80px 0 60px 0;
+            position: relative;
+            z-index: 1;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 1.2rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ABOUT ME */
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .about-text {
+            flex: 2 1 340px;
+            font-size: 1.13rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        .about-strengths {
+            flex: 1 1 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            min-width: 220px;
+        }
+        .strength-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            box-shadow: 0 2px 16px 0 rgba(0,188,212,0.07);
+            transition: box-shadow var(--transition), transform var(--transition);
+            font-weight: 600;
+            font-size: 1.08rem;
+            color: var(--text-main);
+        }
+        .strength-card:hover {
+            box-shadow: 0 4px 32px 0 rgba(233,69,96,0.13);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .strength-card i {
+            font-size: 2.1rem;
+            color: var(--accent-blue);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            flex: 1 1 370px;
+            min-width: 320px;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            position: relative;
+            transition: box-shadow var(--transition), transform var(--transition);
+            z-index: 1;
+        }
+        .project-card:hover {
+            box-shadow: 0 8px 40px 0 rgba(0,188,212,0.13);
+            transform: translateY(-3px) scale(1.02);
+        }
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-pink);
+            margin-bottom: 0.3rem;
+        }
+        .project-summary {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            font-size: 0.98rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.7rem;
+        }
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-actions .btn {
+            font-size: 0.98rem;
+            padding: 0.6em 1.5em;
+            border-radius: 1.5em;
+        }
+        .project-expand {
+            background: none;
+            border: none;
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            align-self: flex-start;
+            transition: color var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+        }
+        .project-expand:hover {
+            color: var(--accent-pink);
             text-decoration: underline;
         }
-        .contact-info {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+
+        /* Project Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(26,26,46,0.93);
+            align-items: center;
+            justify-content: center;
+            padding: 2vw;
+        }
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.25s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            max-width: 540px;
+            width: 100%;
+            padding: 2.2rem 2rem 1.5rem 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            color: var(--text-main);
+            animation: modalPop 0.25s;
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.95);}
+            to { transform: scale(1);}
+        }
+        .modal-close {
+            position: absolute;
+            top: 1.1rem;
+            right: 1.2rem;
+            font-size: 1.5rem;
+            color: var(--accent-pink);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+        .modal-close:hover {
+            color: var(--accent-blue);
+        }
+        .modal-content ul {
+            margin: 0.7em 0 0 1.2em;
+            padding: 0;
+            color: var(--text-main);
+            font-size: 1.05rem;
+        }
+
+        /* SKILLS */
+        .skills-section {
+            background: linear-gradient(120deg, var(--bg-alt) 80%, var(--accent-purple) 120%);
+            position: relative;
+            overflow: hidden;
+        }
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .skill-category {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            min-width: 260px;
+            flex: 1 1 320px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            position: relative;
+        }
+        .skill-category-title {
+            font-size: 1.13rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.7rem;
+            text-align: center;
+        }
+        .skills-icons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            width: 100%;
+            justify-items: center;
+        }
+        .skill-icon-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4em;
+            background: none;
+            border: none;
+            outline: none;
+            cursor: default;
+            transition: transform var(--transition), box-shadow var(--transition);
+            padding: 0.3em 0.2em;
+            border-radius: 0.7em;
+            min-width: 80px;
+            max-width: 110px;
+        }
+        .skill-icon-card i {
+            font-size: 2.1rem;
+            color: var(--accent-blue);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: color var(--transition);
+        }
+        .skill-icon-card span {
+            font-size: 0.98rem;
+            color: var(--text-main);
+            font-weight: 600;
+            margin-top: 0.2em;
+            text-align: center;
+            letter-spacing: 0.2px;
+            line-height: 1.2;
+            user-select: text;
+        }
+        .skill-icon-card:hover, .skill-icon-card:focus {
+            background: rgba(0,188,212,0.08);
+            transform: scale(1.06);
+            box-shadow: 0 2px 16px 0 rgba(0,188,212,0.10);
+        }
+        /* Progress Bars */
+        .progress-bar-container {
+            width: 100%;
+            margin-top: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+        .progress-bar-label {
+            font-size: 0.97rem;
+            color: var(--text-muted);
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            text-align: left;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #23234a;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0.5em;
+            box-shadow: 0 1px 8px 0 rgba(0,188,212,0.07);
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+            border-radius: 8px;
+            transition: width 1.2s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* CERTIFICATIONS */
+        .certs-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+        .certs-list {
+            margin: 0.5em 0 0 1.2em;
+            padding: 0;
+            color: var(--text-main);
+            font-size: 1.05rem;
+        }
+        .certs-list li {
+            margin-bottom: 0.3em;
+        }
+
+        /* CONTACT */
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        .contact-methods {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition);
+        }
+        .contact-method:hover {
+            color: var(--accent-pink);
+            text-decoration: underline;
+        }
+        .contact-method i {
+            font-size: 1.5rem;
+        }
+        .contact-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: #23234a;
+            border: 1.5px solid var(--accent-blue);
+            border-radius: 0.7em;
+            padding: 0.9em 1em;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-family: var(--font-main);
+            outline: none;
+            transition: border-color var(--transition), box-shadow var(--transition);
+            resize: none;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--accent-pink);
+            box-shadow: 0 2px 16px 0 rgba(233,69,96,0.10);
+        }
+        .contact-form label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.2em;
+            display: block;
+        }
+        .contact-form .btn {
+            align-self: flex-start;
+            margin-top: 0.5em;
+        }
+        .form-error {
+            color: var(--accent-pink);
+            font-size: 0.97rem;
+            margin-top: -0.7em;
+            margin-bottom: 0.7em;
+            display: none;
+        }
+        .form-success {
+            color: var(--accent-blue);
+            font-size: 1.05rem;
+            margin-top: 0.7em;
+            display: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-alt);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 2.2rem 0 1.2rem 0;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .footer-heart {
+            color: var(--accent-pink);
+            font-size: 1.1em;
+            vertical-align: middle;
+            margin: 0 0.2em;
+        }
+
+        /* BACK TO TOP BUTTON */
+        #backToTop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 3000;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            font-size: 1.7rem;
+            box-shadow: 0 2px 16px 0 rgba(0,188,212,0.13);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #backToTop.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        #backToTop:hover {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+            transform: scale(1.08);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .about-container, .projects-grid, .skills-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .about-strengths {
+                flex-direction: row;
+                gap: 1.2rem;
+                justify-content: center;
+            }
+        }
+        @media (max-width: 700px) {
+            .about-container, .projects-grid, .skills-grid {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 0 1vw;
+            }
+            section {
+                padding: 60px 0 40px 0;
+            }
+            .modal-content {
+                padding: 1.2rem 0.7rem 1rem 0.7rem;
+            }
+            .certs-container, .contact-container {
+                padding: 1.2rem 0.7rem 1rem 0.7rem;
+            }
+        }
+        @media (max-width: 500px) {
+            .hero-title {
+                font-size: 1.3rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+            .project-card, .skill-category {
+                min-width: 90vw;
+                max-width: 98vw;
+                padding: 1.2rem 0.7rem 1rem 0.7rem;
+            }
+            .about-strengths {
+                flex-direction: column;
+            }
+            .skills-icons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            #backToTop {
+                right: 12px;
+                bottom: 12px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Shewag's Cybersecurity Portfolio</h1>
-            <p>Aspiring SOC L1 Analyst | Defensive Security Enthusiast</p>
-        </header>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-logo">
+            <i class="fas fa-shield-alt"></i> Shewag Bhattarai
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#hero" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#certs">Certifications</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-hamburger" id="navHamburger" aria-label="Open navigation" tabindex="0">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
 
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                I'm Shewag, a dedicated BCA graduate with a strong passion for defensive cybersecurity.
-                My journey has led me to specialize in Security Operations Center (SOC) practices,
-                leveraging tools like Splunk and gaining hands-on experience in cloud security with GCP.
-                I'm proficient in Linux system administration, network analysis, and Python scripting,
-                all geared towards building robust security solutions and detecting threats effectively.
-                I'm actively seeking entry-level SOC Analyst or Junior Security Analyst roles where I can
-                apply my practical skills and contribute to a resilient security posture.
-            </p>
-        </section>
+    <!-- HERO SECTION -->
+    <header class="hero" id="hero">
+        <img src="https://avatars.githubusercontent.com/u/9919?v=4" alt="Shewag Bhattarai Photo" class="hero-photo" loading="lazy">
+        <div class="hero-title">Shewag Bhattarai | Aspiring SOC Analyst &amp; Home Lab Enthusiast</div>
+        <div class="hero-subtitle">
+            <span id="typed-hero"></span>
+        </div>
+        <div class="hero-cta">
+            <a href="#projects" class="btn">View My Projects</a>
+            <a href="https://Linkedin.com/in/shewag-bhattarai-103424236" class="btn" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        </div>
+        <div class="scroll-indicator" aria-label="Scroll down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
 
-        <section id="projects">
-            <h2>My Key Projects</h2>
-            <div class="project-item">
-                <h3>GCP-Powered SOC L1 Splunk Lab (Coming Soon!)</h3>
-                <p>
-                    This project will showcase my ability to set up a comprehensive SIEM environment within Google Cloud Platform.
-                    It involves ingesting diverse logs (Windows Event Logs, Linux Syslog, GCP Audit Logs, VPC Flow Logs) into Splunk,
-                    developing custom dashboards for security monitoring, creating alerts for common threats, and simulating
-                    incident investigation workflows.
-                </p>
-                <p>
-                    <strong>Technologies:</strong> Splunk Enterprise, Google Cloud Platform (Compute Engine, VPC, Cloud Logging), Linux, Windows, Python.
-                </p>
-                <p>
-                    <a href="https://github.com/yourusername/soc-l1-gcp-splunk-lab" target="_blank">View on GitHub</a>
-                    </p>
+    <!-- ABOUT ME -->
+    <section id="about" data-aos="fade-up">
+        <div class="section-title">About Me / My Journey in Cybersecurity</div>
+        <div class="about-container">
+            <div class="about-text">
+                Hello! I'm Shewag Bhattarai, a passionate BCA graduate actively seeking SOC Analyst opportunities in Bangalore, India. My journey into cybersecurity is driven by extensive hands-on experience gained in my fully operational Home SOC Lab. Here, I meticulously simulate real-world cyberattacks and practice the full Incident Response Life Cycle (IRLC), from detection and analysis to containment, eradication, and recovery using industry-standard tools like Splunk, Wazuh, and Jira Service Management. I thrive on proactively hunting threats and leveraging analytical thinking to secure systems, making me a dedicated and valuable addition to any security team.
             </div>
-
-            <div class="project-item">
-                <h3>Network Traffic Analysis & Security Review (Coming Soon!)</h3>
-                <p>
-                    Focused on practical network forensics, this project will demonstrate my skills in capturing and analyzing network traffic
-                    to identify anomalies, security vulnerabilities, and potential attack indicators. I will leverage tools like Wireshark
-                    and network configurations within a simulated GCP environment.
-                </p>
-                <p>
-                    <strong>Technologies:</strong> Wireshark, tcpdump, Google Cloud Platform (Packet Mirroring, VPC), Networking Concepts.
-                </p>
-                <p>
-                    <a href="https://github.com/yourusername/gcp-network-forensics-project" target="_blank">View on GitHub</a>
-                    </p>
+            <div class="about-strengths">
+                <div class="strength-card">
+                    <i class="fas fa-magnifying-glass-chart"></i>
+                    Threat Detection &amp; Analysis
+                </div>
+                <div class="strength-card">
+                    <i class="fas fa-shield-halved"></i>
+                    Incident Response Expert
+                </div>
+                <div class="strength-card">
+                    <i class="fab fa-linux"></i>
+                    Linux Security &amp; Admin
+                </div>
+                <div class="strength-card">
+                    <i class="fas fa-brain"></i>
+                    Analytical Thinking &amp; Problem-Solving
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="project-item">
-                <h3>Basic Security Automation Scripts (Coming Soon!)</h3>
-                <p>
-                    A collection of Python scripts designed to automate routine security tasks, including log parsing,
-                    simple network scanning, and basic interaction with cloud services for security checks.
-                </p>
-                <p>
-                    <strong>Technologies:</strong> Python, Linux/Windows CLI, Google Cloud SDK (basic).
-                </p>
-                <p>
-                    <a href="https://github.com/yourusername/python-security-scripts" target="_blank">View on GitHub</a>
-                    </p>
-            </div>
-        </section>
+    <!-- PROJECTS -->
+    <section id="projects" data-aos="fade-up">
+        <div class="section-title">My Home SOC Lab Projects / Hands-on Incident Response Simulations</div>
+        <div class="section-desc">
+            Explore my practical cybersecurity projects, executed in my comprehensive Home SOC Lab. These projects demonstrate my ability to apply theoretical knowledge to real-world cyber scenarios, following the full Incident Response Life Cycle and featuring detailed incident reports.
+        </div>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <article class="project-card" data-project="1">
+                <div class="project-title">Case Study 1: The Scary Rootkit File - Malware Detection &amp; Analysis</div>
+                <div class="project-summary">
+                    Simulated a rootkit infection on a Windows endpoint. Focused on its detection using Wazuh HIDS, fundamentals of malware analysis, and endpoint recovery procedures. This project reinforced my skills in advanced threat detection, deep log analysis, and malware investigation.
+                </div>
+                <div class="project-tech">
+                    <span><i class="fas fa-shield-virus"></i> Wazuh (HIDS)</span>
+                    <span><i class="fas fa-chart-line"></i> Splunk (SIEM)</span>
+                    <span><i class="fab fa-windows"></i> Windows VM</span>
+                    <span><i class="fab fa-linux"></i> Kali Linux</span>
+                    <span><i class="fas fa-shield-halved"></i> Incident Response</span>
+                    <span><i class="fas fa-scroll"></i> Log Analysis</span>
+                    <span><i class="fas fa-bug"></i> Malware Analysis</span>
+                </div>
+                <div class="project-actions">
+                    <a class="btn" href="https://github.com/Aryan-SOC/Home-SOC-Incident-Reports/blob/main/First-Case_The_Scary_Rootkit_File/incident_report_simulated.pdf" target="_blank" rel="noopener">View Full Report</a>
+                    <a class="btn" href="https://github.com/Aryan-SOC/Home-SOC-Incident-Reports/tree/main/First-Case_The_Scary_Rootkit_File" target="_blank" rel="noopener">Explore on GitHub</a>
+                </div>
+                <button class="project-expand" aria-label="Expand project details" data-project="1">
+                    <i class="fas fa-angle-double-down"></i> Details
+                </button>
+            </article>
+            <!-- Project 2 -->
+            <article class="project-card" data-project="2">
+                <div class="project-title">Case Study 2: The Knocking Neighbor - SSH Brute Force &amp; Persistence</div>
+                <div class="project-summary">
+                    Executed and responded to an SSH brute-force attack against an Ubuntu VM, achieving unauthorized access and establishing persistence via an unauthorized 'auditd' user. This project highlights my end-to-end incident response capabilities, covering detection (Splunk/Wazuh), in-depth log correlation, containment (password change, IP blocking), eradication (user deletion), system hardening, and comprehensive incident reporting in Jira Service Management.
+                </div>
+                <div class="project-tech">
+                    <span><i class="fas fa-chart-line"></i> Splunk (SIEM)</span>
+                    <span><i class="fas fa-shield-virus"></i> Wazuh (HIDS)</span>
+                    <span><i class="fab fa-linux"></i> Ubuntu Server</span>
+                    <span><i class="fab fa-linux"></i> Kali Linux</span>
+                    <span><i class="fas fa-ticket"></i> Jira Service Mgmt</span>
+                    <span><i class="fas fa-network-wired"></i> UFW</span>
+                    <span><i class="fas fa-key"></i> Hydra</span>
+                </div>
+                <div class="project-actions">
+                    <a class="btn" href="https://github.com/Aryan-SOC/Home-SOC-Incident-Reports/blob/main/The%20Case%20of%20the%20Knocking%20Neighbor%20and%20the%20Unlocked%20Door/2nd_incident_report_simulated.pdf" target="_blank" rel="noopener">View Full Report</a>
+                    <a class="btn" href="https://github.com/Aryan-SOC/Home-SOC-Incident-Reports/tree/main/The%20Case%20of%20the%20Knocking%20Neighbor%20and%20the%20Unlocked%20Door" target="_blank" rel="noopener">Explore on GitHub</a>
+                </div>
+                <button class="project-expand" aria-label="Expand project details" data-project="2">
+                    <i class="fas fa-angle-double-down"></i> Details
+                </button>
+            </article>
+        </div>
+    </section>
 
-        <section id="skills">
-            <h2>Skills</h2>
+    <!-- PROJECT MODALS -->
+    <div class="modal" id="modal-project-1" aria-modal="true" role="dialog" tabindex="-1">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close project details">&times;</button>
+            <div class="project-title">Case Study 1: The Scary Rootkit File - Malware Detection &amp; Analysis</div>
             <ul>
-                <li>**SIEM:** Splunk Enterprise (Home Lab Experience, Log Ingestion, Dashboards, Alerts, SPL)</li>
-                <li>**Operating Systems:** Linux (Intermediate), Windows (Intermediate)</li>
-                <li>**Networking:** TCP/IP, DNS, DHCP, Firewalls, Routing, Wireshark, Packet Analysis, GCP VPC & Firewall Rules</li>
-                <li>**Cybersecurity Concepts:** Incident Response Lifecycle, Threat Detection, Log Analysis, MITRE ATT&CK Framework, Cyber Kill Chain, Vulnerability Management (Basics)</li>
-                <li>**Programming/Scripting:** Python (Intermediate for scripting), Bash Scripting, HTML, CSS, JavaScript (Basic)</li>
-                <li>**Cloud Security:** Google Cloud Platform (Compute Engine, Cloud Logging, VPC Flow Logs, IAM basics)</li>
+                <li>Deployed and configured Wazuh HIDS agents for real-time Windows event log collection and File Integrity Monitoring (FIM).</li>
+                <li>Simulated a rootkit infection to observe its behavior and artifacts.</li>
+                <li>Analyzed generated alerts in Wazuh and Splunk to identify rootkit presence.</li>
+                <li>Performed initial malware analysis steps to understand persistence and impact.</li>
+                <li>Executed containment and eradication steps to recover the compromised endpoint.</li>
+                <li>Documented the incident following the Incident Response Life Cycle.</li>
             </ul>
-        </section>
-
-        <section id="contact">
-            <h2 class="contact-info">Contact Me</h2>
-            <p>
-                Email: <a href="mailto:your.email@example.com">your.email@example.com</a> <br>
-                LinkedIn: <a href="https://www.linkedin.com/in/yourlinkedinprofile" target="_blank">linkedin.com/in/yourlinkedinprofile</a> <br>
-                GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
-            </p>
-        </section>
+        </div>
     </div>
+    <div class="modal" id="modal-project-2" aria-modal="true" role="dialog" tabindex="-1">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close project details">&times;</button>
+            <div class="project-title">Case Study 2: The Knocking Neighbor - SSH Brute Force &amp; Persistence</div>
+            <ul>
+                <li>Configured Splunk and Wazuh to detect high volumes of failed SSH logins and new user creation.</li>
+                <li>Launched a simulated brute-force attack from Kali Linux, gaining unauthorized SSH access.</li>
+                <li>Investigated logs to identify successful login, attacker IP, and the creation of the 'auditd' persistence user.</li>
+                <li>Executed immediate containment (password reset, IP blocking) and eradication (user deletion) measures.</li>
+                <li>Performed recovery steps including SSH hardening and system patching.</li>
+                <li>Managed the incident lifecycle within Jira Service Management and documented the full process.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills-section" data-aos="fade-up">
+        <div class="section-title">My Technical Proficiencies &amp; Core Competencies</div>
+        <div class="section-desc">
+            A detailed overview of my technical expertise and essential soft skills, honed through dedicated study and extensive hands-on lab practice.
+        </div>
+        <div class="skills-grid">
+            <!-- Category 1 -->
+            <div class="skill-category">
+                <div class="skill-category-title">Security Operations &amp; IR</div>
+                <div class="skills-icons-grid">
+                    <div class="skill-icon-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Incident Response Lifecycle</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-magnifying-glass-chart"></i>
+                        <span>Threat Detection</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-screwdriver-wrench"></i>
+                        <span>Security Hardening</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Compliance &amp; Reporting</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-label">Hands-on Mastery</div>
+                    <div class="progress-bar"><div class="progress-bar-fill" data-progress="90"></div></div>
+                </div>
+            </div>
+            <!-- Category 2 -->
+            <div class="skill-category">
+                <div class="skill-category-title">Tools &amp; Platforms</div>
+                <div class="skills-icons-grid">
+                    <div class="skill-icon-card">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Splunk (SIEM)</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-shield-virus"></i>
+                        <span>Wazuh (HIDS)</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-ticket"></i>
+                        <span>Jira Service Mgmt</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fab fa-linux"></i>
+                        <span>Linux CLI/Security</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-network-wired"></i>
+                        <span>Networking (UFW, Nmap)</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fab fa-python"></i>
+                        <span>Python &amp; Bash</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-label">Lab Experience</div>
+                    <div class="progress-bar"><div class="progress-bar-fill" data-progress="85"></div></div>
+                </div>
+            </div>
+            <!-- Category 3 -->
+            <div class="skill-category">
+                <div class="skill-category-title">Concepts &amp; Soft Skills</div>
+                <div class="skills-icons-grid">
+                    <div class="skill-icon-card">
+                        <i class="fas fa-compass"></i>
+                        <span>MITRE ATT&amp;CK</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-scroll"></i>
+                        <span>Log Analysis &amp; Correlation</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-book"></i>
+                        <span>Documentation</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-atom"></i>
+                        <span>Analytical Thinking</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Problem-Solving</span>
+                    </div>
+                    <div class="skill-icon-card">
+                        <i class="fab fa-google"></i>
+                        <span>AI for SOC (Gemini)</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-label">Continuous Growth</div>
+                    <div class="progress-bar"><div class="progress-bar-fill" data-progress="80"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS & EDUCATION -->
+    <section id="certs" data-aos="fade-up">
+        <div class="section-title">Certifications &amp; Education</div>
+        <div class="certs-container">
+            <div>
+                <strong>Education:</strong> Bachelor of Computer Applications (BCA), Biswanath College, Gauhati University, Expected Graduation: October 2025
+            </div>
+            <div>
+                <strong>Certifications:</strong>
+                <ul class="certs-list">
+                    <li><i class="fa-solid fa-certificate"></i> Introduction to Cybersecurity (Coursera)</li>
+                    <li><i class="fa-solid fa-certificate"></i> Introduction to Security Information and Event Management (SIEM) (Coursera)</li>
+                    <li><i class="fa-solid fa-certificate"></i> Automate Cybersecurity Tasks with Python (Google)</li>
+                    <li><i class="fa-solid fa-certificate"></i> Mindcast: Cybersecurity Job Simulation (Immersive Labs)</li>
+                    <li><i class="fa-solid fa-certificate"></i> SIEM Event Management with Splunk Security (Coursera)</li>
+                    <li><i class="fa-solid fa-certificate"></i> Tools of the Trade: Linux and SQL (Google)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" data-aos="fade-up">
+        <div class="section-title">Get in Touch / Connect with Me</div>
+        <div class="contact-container">
+            <div>
+                I am actively exploring new opportunities in Bangalore, India for SOC Analyst roles and am eager to apply my hands-on skills in a dynamic team environment. Feel free to connect with me or reach out for discussions and collaborations!
+            </div>
+            <div class="contact-methods">
+                <a class="contact-method" href="www.linkedin.com/in/shewag-bhattarai-103424236" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a class="contact-method" href="mailto:bhattaraishewag178@gmail.com?subject=Contact%20from%20Portfolio&body=Hi%20Shewag%2C%0A%0A" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-envelope"></i> Email
+                </a>
+                <a href="mailto:bhattaraishewag178@gmail.com" class="contact-icon" aria-label="Email Shewag Bhattarai">
+    <i class="fa-solid fa-envelope"></i>
+    <span class="contact-text">Email</span> <!-- Optional: Display email directly -->
+</a>
+            </div>
+            <form class="contact-form" id="contactForm" novalidate>
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required autocomplete="name" aria-required="true">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" aria-required="true">
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
+                </div>
+                <div class="form-error" id="formError"></div>
+                <button type="submit" class="btn">Send Message</button>
+                <div class="form-success" id="formSuccess">Thank you! Your message has been validated (demo only).</div>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; Shewag Bhattarai <span id="footerYear"></span>. All Rights Reserved.<br>
+        Built with <span class="footer-heart">&hearts;</span> and cybersecurity passion.
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // NAVIGATION: Hamburger toggle
+        const navHamburger = document.getElementById('navHamburger');
+        const navLinks = document.getElementById('navLinks');
+        navHamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        navHamburger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
+        });
+        // Close nav on link click (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // NAVIGATION: Smooth scroll and active link
+        document.querySelectorAll('nav .nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        // Active nav link on scroll
+        const sections = Array.from(document.querySelectorAll('section, header.hero'));
+        window.addEventListener('scroll', () => {
+            let scrollPos = window.scrollY + 120;
+            let current = sections[0].id;
+            for (const sec of sections) {
+                if (sec.offsetTop <= scrollPos) current = sec.id;
+            }
+            document.querySelectorAll('nav .nav-links a').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href').replace('#','') === current);
+            });
+        });
+
+        // HERO: Typed.js animation
+        document.addEventListener('DOMContentLoaded', function() {
+            new Typed('#typed-hero', {
+                strings: [
+                    "Proactive Threat Hunter | Incident Response Practitioner",
+                    "Hands-on SIEM & HIDS Specialist | Driving Cyber Resilience",
+                    "Turning Alerts into Insights from My Home Lab"
+                ],
+                typeSpeed: 38,
+                backSpeed: 22,
+                backDelay: 1700,
+                loop: true,
+                showCursor: true,
+                cursorChar: '|'
+            });
+        });
+
+        // AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 80
+        });
+
+        // PROJECT MODALS
+        function openModal(id) {
+            document.getElementById('modal-project-' + id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                document.getElementById('modal-project-' + id).focus();
+            }, 100);
+        }
+        function closeModal(id) {
+            document.getElementById('modal-project-' + id).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.querySelectorAll('.project-expand').forEach(btn => {
+            btn.addEventListener('click', function() {
+                openModal(this.dataset.project);
+            });
+        });
+        document.querySelectorAll('.modal-close').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            modal.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // SKILLS: Animate progress bars on scroll into view
+        function animateProgressBars() {
+            document.querySelectorAll('.progress-bar-fill').forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    bar.style.width = bar.dataset.progress + '%';
+                }
+            });
+        }
+        window.addEventListener('scroll', animateProgressBars);
+        window.addEventListener('DOMContentLoaded', animateProgressBars);
+
+        // BACK TO TOP BUTTON
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 350) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // CONTACT FORM VALIDATION
+        const contactForm = document.getElementById('contactForm');
+        const formError = document.getElementById('formError');
+        const formSuccess = document.getElementById('formSuccess');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formError.style.display = 'none';
+            formSuccess.style.display = 'none';
+            let name = contactForm.name.value.trim();
+            let email = contactForm.email.value.trim();
+            let message = contactForm.message.value.trim();
+            let valid = true;
+            let errorMsg = '';
+            if (name.length < 2) {
+                valid = false;
+                errorMsg = 'Please enter your name.';
+            } else if (!/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+                valid = false;
+                errorMsg = 'Please enter a valid email address.';
+            } else if (message.length < 10) {
+                valid = false;
+                errorMsg = 'Please enter a message (at least 10 characters).';
+            }
+            if (!valid) {
+                formError.textContent = errorMsg;
+                formError.style.display = 'block';
+                return;
+            }
+            formSuccess.style.display = 'block';
+            contactForm.reset();
+        });
+
+        // Footer year
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Accessibility: trap focus in modal
+        function trapFocus(modal) {
+            const focusableEls = modal.querySelectorAll('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstEl = focusableEls[0];
+            const lastEl = focusableEls[focusableEls.length - 1];
+            modal.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstEl) {
+                            e.preventDefault();
+                            lastEl.focus();
+                        }
+                    } else {
+                        if (document.activeElement === lastEl) {
+                            e.preventDefault();
+                            firstEl.focus();
+                        }
+                    }
+                }
+            });
+        }
+        document.querySelectorAll('.modal').forEach(trapFocus);
+
+        // Scroll-down indicator click
+        document.querySelector('.scroll-indicator').addEventListener('click', function() {
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
